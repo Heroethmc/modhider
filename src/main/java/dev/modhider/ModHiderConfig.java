@@ -23,11 +23,23 @@ public final class ModHiderConfig {
     public boolean hideChannels = true;
     /** Resolve server-supplied sign/anvil text exactly like an unmodded client would. */
     public boolean blockTranslationProbes = true;
+    /**
+     * Mods (by mod id / channel namespace) that every server may see and talk to, e.g. Simple Voice Chat.
+     * Their network channels are announced and their packets are sent as usual.
+     */
+    public List<String> visibleMods = new ArrayList<>(List.of("voicechat"));
     /** Servers that should see your mods normally, e.g. "play.example.com" or "1.2.3.4:25566". */
     public List<String> allowedServers = new ArrayList<>();
 
     public static ModHiderConfig get() {
         return instance;
+    }
+
+    public boolean isVisibleMod(String namespace) {
+        for (String mod : visibleMods) {
+            if (mod.trim().equalsIgnoreCase(namespace)) return true;
+        }
+        return false;
     }
 
     public boolean isAllowed(String address) {
@@ -55,6 +67,7 @@ public final class ModHiderConfig {
                     ModHiderConfig loaded = GSON.fromJson(reader, ModHiderConfig.class);
                     if (loaded != null) {
                         if (loaded.allowedServers == null) loaded.allowedServers = new ArrayList<>();
+                        if (loaded.visibleMods == null) loaded.visibleMods = new ArrayList<>();
                         instance = loaded;
                     }
                 }

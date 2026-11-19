@@ -6,8 +6,8 @@ A client-side Fabric mod for Minecraft 1.21.11 (and 1.21.1) that hides your inst
 
 Pick the file that matches your Minecraft version:
 
-- **Minecraft 1.21.11:** [modhider-1.0.0+mc1.21.11.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.0.0%2Bmc1.21.11.jar)
-- **Minecraft 1.21.1:** [modhider-1.0.0+mc1.21.1.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.0.0%2Bmc1.21.1.jar)
+- **Minecraft 1.21.11:** [modhider-1.1.0+mc1.21.11.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.1.0%2Bmc1.21.11.jar)
+- **Minecraft 1.21.1:** [modhider-1.0.0+mc1.21.1.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.0.0%2Bmc1.21.1.jar) (older version, without the `visibleMods` setting)
 
 ## Install
 
@@ -36,9 +36,12 @@ Singleplayer is never affected.
   "spoofBrand": true,
   "hideChannels": true,
   "blockTranslationProbes": true,
+  "visibleMods": ["voicechat"],
   "allowedServers": []
 }
 ```
+
+`visibleMods` lists mods every server may see and talk to. It contains [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) (`voicechat`) by default, so voice chat keeps working and the server can tell you have it. Add other mod ids to show those mods too.
 
 Add a server to `allowedServers` (for example `"play.example.com"`) to let it see your mods normally. Use this for modded servers that need your mods to talk to them.
 
