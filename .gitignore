@@ -3,3 +3,4 @@ build/
 run/
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
+!download/*.jar

@@ -4,7 +4,7 @@ A client-side Fabric mod for Minecraft 1.21.1 that hides your installed mods fro
 
 ## Download
 
-Get `modhider-1.0.0.jar` from the [Releases](../../releases) page.
+**[Click here to download modhider-1.0.0.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.0.0.jar)**
 
 ## Install
 
