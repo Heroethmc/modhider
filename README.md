@@ -1,15 +1,18 @@
 # Mod Hider
 
-A client-side Fabric mod for Minecraft 1.21.1 that hides your installed mods from multiplayer servers.
+A client-side Fabric mod for Minecraft 1.21.11 (and 1.21.1) that hides your installed mods from multiplayer servers.
 
 ## Download
 
-**[Click here to download modhider-1.0.0.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.0.0.jar)**
+Pick the file that matches your Minecraft version:
+
+- **Minecraft 1.21.11:** [modhider-1.0.0+mc1.21.11.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.0.0%2Bmc1.21.11.jar)
+- **Minecraft 1.21.1:** [modhider-1.0.0+mc1.21.1.jar](https://github.com/Heroethmc/modhider/raw/main/download/modhider-1.0.0%2Bmc1.21.1.jar)
 
 ## Install
 
-1. Install [Fabric Loader](https://fabricmc.net/use/installer/) for Minecraft 1.21.1.
-2. Put `modhider-1.0.0.jar` in your mods folder:
+1. Install [Fabric Loader](https://fabricmc.net/use/installer/) for your Minecraft version.
+2. Put the jar in your mods folder:
    - Windows: `%appdata%\.minecraft\mods`
    - macOS: `~/Library/Application Support/minecraft/mods`
    - Linux: `~/.minecraft/mods`
@@ -49,4 +52,4 @@ This hides which mods are installed. It does not hide what they do: anti-cheat t
 ./gradlew build
 ```
 
-The jar is written to `build/libs/`.
+The jar is written to `build/libs/`. The source on `main` targets 1.21.11.
