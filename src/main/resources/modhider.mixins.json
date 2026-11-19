@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.modhider.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "AbstractSignEditScreenMixin",
+    "AnvilScreenMixin",
+    "ClientConnectionMixin",
+    "ConnectScreenMixin",
+    "TranslationStorageMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}
