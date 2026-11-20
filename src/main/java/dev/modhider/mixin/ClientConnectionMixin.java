@@ -4,7 +4,7 @@ import dev.modhider.ChannelFilter;
 import dev.modhider.ModHider;
 import dev.modhider.ModHiderConfig;
 import net.minecraft.network.ClientConnection;
-import io.netty.channel.ChannelFutureListener;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.network.packet.BrandCustomPayload;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.network.packet.Packet;
@@ -19,10 +19,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientConnection.class)
 abstract class ClientConnectionMixin {
-    private static final String SEND = "send(Lnet/minecraft/network/packet/Packet;Lio/netty/channel/ChannelFutureListener;Z)V";
+    // The second argument changed type across 1.21.x, so match both forms.
+    private static final String SEND_OLD = "send(Lnet/minecraft/network/packet/Packet;Lnet/minecraft/network/PacketCallbacks;Z)V";
+    private static final String SEND_NEW = "send(Lnet/minecraft/network/packet/Packet;Lio/netty/channel/ChannelFutureListener;Z)V";
 
     /** Swap packets that would reveal mods for what a vanilla client sends. */
-    @ModifyVariable(method = SEND, at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(method = {SEND_OLD, SEND_NEW}, at = @At("HEAD"), argsOnly = true, require = 1)
     private Packet<?> modhider$replacePacket(Packet<?> packet) {
         ClientConnection self = (ClientConnection) (Object) this;
         if (!ModHider.shouldHide(self)) return packet;
@@ -49,8 +51,8 @@ abstract class ClientConnectionMixin {
     }
 
     /** Drop channel announcements and plugin messages of mods the server may not see. */
-    @Inject(method = SEND, at = @At("HEAD"), cancellable = true)
-    private void modhider$dropModPackets(Packet<?> packet, ChannelFutureListener listener, boolean flush, CallbackInfo ci) {
+    @Inject(method = {SEND_OLD, SEND_NEW}, at = @At("HEAD"), cancellable = true, require = 1)
+    private void modhider$dropModPackets(CallbackInfo ci, @Local(argsOnly = true) Packet<?> packet) {
         if (!(packet instanceof CustomPayloadC2SPacket custom)) return;
         ClientConnection self = (ClientConnection) (Object) this;
         if (!ModHiderConfig.get().hideChannels || !ModHider.shouldHide(self)) return;

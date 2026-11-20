@@ -4,3 +4,4 @@ run/
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
 !download/*.jar
+!mc26/gradle/wrapper/gradle-wrapper.jar

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "modhider",
+  "version": "${version}",
+  "name": "Mod Hider",
+  "description": "Hides your installed mods from multiplayer servers: reports a vanilla client brand, stops mod channel announcements and blocks sign/anvil translation-key probing.",
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.modhider.ModHider"]
+  },
+  "mixins": ["modhider.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "${minecraft_version}",
+    "java": ">=25"
+  }
+}

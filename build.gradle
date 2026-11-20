@@ -2,25 +2,35 @@ plugins {
     id 'fabric-loom' version '1.14-SNAPSHOT'
 }
 
-version = project.mod_version
+// Per-Minecraft-version settings live in versions/<mc>.properties.
+def mcProps = new Properties()
+file("versions/${project.mc}.properties").withInputStream { mcProps.load(it) }
+def minecraftVersion = mcProps.minecraft_version
+
+version = "${project.mod_version}+mc${minecraftVersion}"
 group = 'dev.modhider'
 base { archivesName = 'modhider' }
 
+loom {
+    // Keep each version's dev run (config, logs) separate.
+    runConfigs.configureEach { runDir = "run/${minecraftVersion}" }
+}
+
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    minecraft "com.mojang:minecraft:${minecraftVersion}"
+    mappings "net.fabricmc:yarn:${mcProps.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     // Only used in the dev environment for testing; the mod itself does not require Fabric API.
-    modLocalRuntime "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modLocalRuntime "net.fabricmc.fabric-api:fabric-api:${mcProps.fabric_version}"
 }
 
 processResources {
-    inputs.property 'version', project.version
-    filesMatching('fabric.mod.json') { expand 'version': project.version }
+    def props = [version: project.version, minecraft_version: minecraftVersion]
+    inputs.properties props
+    filesMatching('fabric.mod.json') { expand props }
 }
 
 java {
-    toolchain { languageVersion = JavaLanguageVersion.of(21) }
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
