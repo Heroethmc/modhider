@@ -5,6 +5,7 @@
   "name": "Mod Hider",
   "description": "Hides your installed mods from multiplayer servers: reports a vanilla client brand, stops mod channel announcements and blocks sign/anvil translation-key probing.",
   "license": "MIT",
+  "icon": "assets/modhider/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": ["dev.modhider.ModHider"]

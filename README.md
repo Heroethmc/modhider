@@ -1,3 +1,5 @@
+<img src="art/icon-512.png" alt="Mod Hider icon" width="128">
+
 # Mod Hider
 
 A client-side Fabric mod for Minecraft 1.21.5 to 1.21.11, 26.1 and 26.2 that hides your installed mods from multiplayer servers.
